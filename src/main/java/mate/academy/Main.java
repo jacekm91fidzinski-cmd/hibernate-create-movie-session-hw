@@ -18,14 +18,6 @@ public class Main {
         MovieService movieService =
                 (MovieService) injector.getInstance(MovieService.class);
 
-        CinemaHallService cinemaHallService =
-                (CinemaHallService) injector.getInstance(
-                        CinemaHallService.class);
-
-        MovieSessionService movieSessionService =
-                (MovieSessionService) injector.getInstance(
-                        MovieSessionService.class);
-
         Movie movie = new Movie();
         movie.setTitle("Avatar");
         movie.setDescription("Sci-fi");
@@ -34,6 +26,10 @@ public class Main {
 
         System.out.println(movieService.get(movie.getId()));
         System.out.println(movieService.getAll());
+
+        CinemaHallService cinemaHallService =
+                (CinemaHallService) injector.getInstance(
+                        CinemaHallService.class);
 
         CinemaHall hall = new CinemaHall();
         hall.setCapacity(120);
@@ -44,6 +40,10 @@ public class Main {
         System.out.println(cinemaHallService.get(hall.getId()));
         System.out.println(cinemaHallService.getAll());
 
+        final MovieSessionService movieSessionService =
+                (MovieSessionService) injector.getInstance(
+                        MovieSessionService.class);
+
         MovieSession session = new MovieSession();
         session.setMovie(movie);
         session.setCinemaHall(hall);
@@ -51,8 +51,7 @@ public class Main {
 
         session = movieSessionService.add(session);
 
-        System.out.println(
-                movieSessionService.get(session.getId()));
+        System.out.println(movieSessionService.get(session.getId()));
 
         System.out.println(
                 movieSessionService.findAvailableSessions(
@@ -60,3 +59,4 @@ public class Main {
                         LocalDate.now()));
     }
 }
+
